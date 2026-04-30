@@ -65,7 +65,6 @@ function handleEqualsClick() {
 
     updateDisplay(result);
 
-    // reset state so you can keep going
     firstNumber = result.toString();
     secondNumber = "";
     operator = "";
@@ -74,3 +73,42 @@ function handleEqualsClick() {
 }
 
 equalsButton.addEventListener("click", handleEqualsClick);
+
+function handleClearClick() {
+  firstNumber = "";
+  secondNumber = "";
+  operator = "";
+  isSecondNumber = false;
+
+  updateDisplay("0");
+}
+
+clearButton.addEventListener("click", handleClearClick);
+
+function handleDecimalClick() {
+  if (isSecondNumber) {
+    if (!secondNumber.includes(".")) {
+      secondNumber += ".";
+      updateDisplay(secondNumber);
+    }
+  } else {
+    if (!firstNumber.includes(".")) {
+      firstNumber += ".";
+      updateDisplay(firstNumber);
+    }
+  }
+}
+
+decimalButton.addEventListener("click", handleDecimalClick);
+
+function handleBackspaceClick() {
+  if (isSecondNumber) {
+    secondNumber = secondNumber.slice(0, -1);
+    updateDisplay(secondNumber || "0");
+  } else {
+    firstNumber = firstNumber.slice(0, -1);
+    updateDisplay(firstNumber || "0");
+  }
+}
+
+backspaceButton.addEventListener("click", handleBackspaceClick);
